@@ -11,10 +11,20 @@ const config: Config = {
       fontFamily: {
         sans: ['var(--font-main)']
       },
+      skew: {
+        '17': '-9deg',
+      },
+      boxShadow: {
+        '3xl': '-5px 10px 5px 2px rgba(0, 0, 0, 0.75)',
+        //-5px 10px 5px 2px rgba(0,0,0,0.75)
+      },
       colors: {
         transparent: 'transparent',
         current: 'currentColor',
         'orange': '#ff5522',
+      },
+      spacing: {
+        '-7px': '-7px',
       }
     },
   },

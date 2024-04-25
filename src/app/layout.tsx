@@ -18,8 +18,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html className={urbanist.variable} lang="en">
-      <body className='bg-gradient-to-r from-[#f0c10a] to-[#fc001b]'>{children}</body>
+    <html className={`${urbanist.variable} + 'h-screen'`} lang="en">
+      <body className='h-screen content-center bg-gradient-to-r from-[#f0c10a] to-[#fc001b] flex'>{children}</body>
     </html>
   );
 }
