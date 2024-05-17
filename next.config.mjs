@@ -7,8 +7,7 @@ const nextConfig = {
         // !! WARN !!
         ignoreBuildErrors: true,
       },
-      output: 'export',
-      distDir: 'dist',
+    istDir: 'dist',
 };
 
 export default nextConfig;
