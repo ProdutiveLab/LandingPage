@@ -22,6 +22,7 @@ const config: Config = {
         transparent: 'transparent',
         current: 'currentColor',
         'orange': '#ff5522',
+        'bgMain': '#ef9a1b'
       },
       spacing: {
         '-7px': '-7px',
