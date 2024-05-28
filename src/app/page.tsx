@@ -65,8 +65,8 @@ export default function Home() {
   const [likes, setLikes] = useState('sobre');
 
   return (
-    <main className="max-lg:h-full bg-bgMain rounded-3xl container mx-auto border-white border-8 self-center shadow-lg">
-      <div className="max-lg:max-h-screen max-lg:overflow-y-auto p-8">
+    <main className="max-lg:mt-0 mt-8 bg-bgMain rounded-3xl container mx-auto border-white border-8 self-center shadow-lg">
+      <div className="max-lg:p-4 p-8">
         <div className={`max-lg:flex-col max-lg:flex-col-reverse flex max-lg:items-center transition-all duration-500 ${likes === 'sobre' ? 'opacity-100 h-auto visible block' : 'opacity-0 p-0 h-0 invisible none'}`}>
           <div className="relative w-4/12 max-lg:w-1/2">
             <Image
