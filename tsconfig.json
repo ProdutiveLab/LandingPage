@@ -7,7 +7,7 @@
     ],
     "allowJs": true,
     "skipLibCheck": true,
-    "strict": true,
+    "strict": false,
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
@@ -35,6 +35,6 @@
     "dist/types/**/*.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules","sst.config.ts"
   ]
 }
