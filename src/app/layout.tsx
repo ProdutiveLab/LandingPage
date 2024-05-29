@@ -8,8 +8,10 @@ const urbanist = Urbanist({
 });
 
 export const metadata: Metadata = {
-  title: "ContaTempo",
-  description: "Gestão de horas",
+  metadataBase: new URL("https://www.contatempo.com.br/"), // URL base do seu site
+  title: "Conta Tempo Gestão de horas",
+  description: "Acompanhe em tempo real a produtividade e engajamento do seu time.",
+  keywords: ['gestão de horas, relógio de ponto, horas trabalhada, acompanhar funcionarios, monitoramento de trabalho, produtividade, bem-estar no trabalho, eficiência, acompanhamento de produtividade, engajamento da equipe, Conta Tempo'],
 };
 
 export default function RootLayout({
