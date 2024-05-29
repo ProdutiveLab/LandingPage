@@ -16,7 +16,7 @@ const Accordion: React.FC<AccordionProps> = ({ items }) => {
   };
 
   return (
-    <div className="w-8/12">
+    <div className="w-8/12 max-lg:w-full">
       {items.map((item, index) => (
         <div key={index} className="border-b">
           <div
@@ -85,10 +85,10 @@ export default function Home() {
           <div className="flex flex-col justify-center">
             <div className="flex">
               <div className="flex-1 flex flex-col">
-                <p className="max-lg:text-3xl text-4xl mb-8 drop-shadow-lg">Acompanhe em <span className="max-lg:text-5xl text-6xl font-extrabold">tempo real</span> a <span className="max-lg:text-5xl text-6xl font-extrabold">produtividade</span> e <span className="max-lg:text-5xl text-6xl font-extrabold">engajamento</span> do seu time.</p>
+                <p className="max-lg:text-2xl text-4xl mb-8 drop-shadow-lg">Acompanhe em <span className="max-lg:text-4xl text-6xl font-extrabold">tempo real</span> a <span className="max-lg:text-4xl text-6xl font-extrabold">produtividade</span> e <span className="max-lg:text-4xl text-6xl font-extrabold">engajamento</span> do seu time.</p>
               </div>
             </div>
-            <p className="text-stone-600 p-8 text-2xl text-center text-white">Equilibrando eficiência e bem-estar, nossa solução de gestão de horas oferece insights que impulsionam produtividade e cuidam do seu time.</p>
+            <p className="max-lg:text-lg max-lg:p-2 text-stone-600 p-8 text-2xl text-center text-white">Equilibrando eficiência e bem-estar, nossa solução de gestão de horas oferece insights que impulsionam produtividade e cuidam do seu time.</p>
             <button className="w-auto m-auto inline-block py-2 px-4 text-white rounded bg-sky-600">Solicitar teste gratuito</button>
           </div>
         </div>
@@ -97,7 +97,7 @@ export default function Home() {
           <h1 className="max-lg:text-3xl text-4xl mb-8 drop-shadow-lg">Funcionalidades</h1>
           <div className="flex justify-between items-center">
             <Accordion items={features} />
-            <div className="relative max-lg:w-1/2">
+            <div className="relative max-lg:hidden">
               <Image
                 src="/home2.png"
                 alt="Vercel Logo"
@@ -115,10 +115,10 @@ export default function Home() {
           <h1 className="max-lg:text-3xl text-4xl mb-8 drop-shadow-lg">Contato</h1>
           <div className="flex justify-between">
             <div>
-            <p className="py-4">Fale conosco atráves do número abaixo e entraremos em contato</p>
-            <a className="text-white rounded bg-sky-600 p-4" href="https://api.whatsapp.com/send?phone=+5511992047052&amp;text=Olá, Gostaria de conhecer mais sobre o produto">(11) 99204-7052</a>
+              <p className="py-4">Fale conosco atráves do número abaixo e entraremos em contato</p>
+              <a className="text-white rounded bg-sky-600 p-4" href="https://api.whatsapp.com/send?phone=+5511992047052&amp;text=Olá, Gostaria de conhecer mais sobre o produto">(11) 99204-7052</a>
             </div>
-            <div className="relative max-lg:w-1/2">
+            <div className="relative max-lg:w-1/2 max-lg:hidden">
               <Image
                 src="/home4.png"
                 alt="Vercel Logo"
