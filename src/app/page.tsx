@@ -64,71 +64,74 @@ const features = [
     content: 'Saiba a quantidade de horas trabalhadas por cada funcionário, tanto no dia atual quanto em períodos selecionados, permitindo uma comparação e análise detalhada.'
   }
 ];
-
+// ${likes === 'sobre' ? 'opacity-100 h-auto visible block' : 'opacity-0 p-0 h-0 invisible none'}
 export default function Home() {
   const [likes, setLikes] = useState('sobre');
 
   return (
-    <main className="max-lg:min-h-screen max-lg:mt-0 h-5/6 relative mt-8 bg-bgMain rounded-3xl container mx-auto border-white border-8 self-center shadow-lg">
-      <div className="max-lg:min-h-screen h-full max-lg:p-4 p-8">
-        <div className={`max-lg:flex-col max-lg:flex-col-reverse flex max-lg:items-center transition-all duration-500 ${likes === 'sobre' ? 'opacity-100 h-auto visible block' : 'opacity-0 p-0 h-0 invisible none'}`}>
-          <div className="relative w-4/12 max-lg:w-1/2">
-            <Image
-              src="/home6.png"
-              alt="Vercel Logo"
-              className="max-lg:relative max-lg:z-0 max-lg:bottom-auto max-lg:left-auto max-lg:mt-8 max-lg:max-w-full z-10 absolute max-w-full max-w-lg -bottom-[269px] -left-[35px] h-auto"
-              width={349}
-              height={559}
-              priority
-            />
+    <main className="max-lg:min-h-screen h-5/6 relative bg-bgMain rounded-3xl container mx-auto border-white border-8 self-center shadow-lg">
+      <div className="max-lg:min-h-screen flex items-center h-full max-lg:p-4 p-8">
+        <div className={`w-full ${likes === 'sobre' ? 'block' : 'hidden'}`}>
+          <div className={`max-lg:flex-col max-lg:flex-col-reverse flex max-lg:items-center transition-all duration-500`}>
+            <div className="relative w-6/12 max-lg:w-1/2">
+              <Image
+                src="/home6.png"
+                alt="Vercel Logo"
+                className="max-lg:relative max-lg:z-0 max-lg:bottom-auto max-lg:left-auto max-lg:mt-8 max-lg:max-w-full z-10 absolute max-w-screen-2xl -bottom-[169px] -left-[35px] h-auto"
+                width={430}
+                height={690}
+                priority
+              />
+            </div>
+            <div className="flex flex-col justify-center">
+              <div className="flex">
+                <div className="flex-1 flex flex-col">
+                  <p className="max-lg:text-2xl text-4xl mb-8 drop-shadow-lg">Acompanhe em <span className="max-lg:text-4xl text-6xl font-extrabold">tempo real</span> a <span className="max-lg:text-4xl text-6xl font-extrabold">produtividade</span> e <span className="max-lg:text-4xl text-6xl font-extrabold">engajamento</span> do seu time.</p>
+                </div>
+              </div>
+              <p className="max-lg:text-lg max-lg:p-2 text-stone-600 p-8 text-2xl text-center text-white">Equilibrando eficiência e bem-estar, nossa solução de gestão de horas oferece insights que impulsionam produtividade e cuidam do seu time.</p>
+              <button className="w-auto m-auto inline-block py-2 px-4 text-white rounded bg-sky-600">Solicitar teste gratuito</button>
+            </div>
           </div>
-          <div className="flex flex-col justify-center">
-            <div className="flex">
-              <div className="flex-1 flex flex-col">
-                <p className="max-lg:text-2xl text-4xl mb-8 drop-shadow-lg">Acompanhe em <span className="max-lg:text-4xl text-6xl font-extrabold">tempo real</span> a <span className="max-lg:text-4xl text-6xl font-extrabold">produtividade</span> e <span className="max-lg:text-4xl text-6xl font-extrabold">engajamento</span> do seu time.</p>
+        </div>
+        <div className={`w-full ${likes === 'funcionalidades' ? 'block' : 'hidden'}`}>
+          <div className="w-full flex flex-col">
+            <h1 className="max-lg:text-3xl text-4xl mb-8 drop-shadow-lg">Funcionalidades</h1>
+            <div className="flex justify-between items-center">
+              <Accordion items={features} />
+              <div className="relative max-lg:hidden">
+                <Image
+                  src="/home2.png"
+                  alt="Vercel Logo"
+                  className="m-auto"
+                  width={349}
+                  height={559}
+                  priority
+                />
               </div>
             </div>
-            <p className="max-lg:text-lg max-lg:p-2 text-stone-600 p-8 text-2xl text-center text-white">Equilibrando eficiência e bem-estar, nossa solução de gestão de horas oferece insights que impulsionam produtividade e cuidam do seu time.</p>
-            <button className="w-auto m-auto inline-block py-2 px-4 text-white rounded bg-sky-600">Solicitar teste gratuito</button>
           </div>
         </div>
-        <div className={`${likes === 'funcionalidades' ? 'block' : 'hidden'}`}>
+        <div className={`w-full ${likes === 'contato' ? 'block' : 'hidden'}`}>
           <div className="flex flex-col">
-          <h1 className="max-lg:text-3xl text-4xl mb-8 drop-shadow-lg">Funcionalidades</h1>
-          <div className="flex justify-between items-center">
-            <Accordion items={features} />
-            <div className="relative max-lg:hidden">
-              <Image
-                src="/home2.png"
-                alt="Vercel Logo"
-                className="m-auto"
-                width={349}
-                height={559}
-                priority
-              />
+            <h1 className="max-lg:text-3xl text-4xl mb-8 drop-shadow-lg">Contato</h1>
+            <div className="flex justify-between">
+              <div>
+                <p className="py-4">Fale conosco atráves do número abaixo e entraremos em contato</p>
+                <a className="text-white rounded bg-sky-600 p-4" href="https://www.linkedin.com/company/contatempo/">linkedin</a>
+                {/* <a className="text-white rounded bg-sky-600 p-4" href="https://api.whatsapp.com/send?phone=+5511992047052&amp;text=Olá, Gostaria de conhecer mais sobre o produto">(11) 99204-7052</a> */}
+              </div>
+              <div className="relative max-lg:w-1/2 max-lg:hidden">
+                <Image
+                  src="/home4.png"
+                  alt="Vercel Logo"
+                  className="m-auto"
+                  width={349}
+                  height={559}
+                  priority
+                />
+              </div>
             </div>
-          </div>
-          </div>
-        </div>
-        <div className={`${likes === 'contato' ? 'block' : 'hidden'}`}>
-          <div className="flex flex-col">
-          <h1 className="max-lg:text-3xl text-4xl mb-8 drop-shadow-lg">Contato</h1>
-          <div className="flex justify-between">
-            <div>
-              <p className="py-4">Fale conosco atráves do número abaixo e entraremos em contato</p>
-              <a className="text-white rounded bg-sky-600 p-4" href="https://api.whatsapp.com/send?phone=+5511992047052&amp;text=Olá, Gostaria de conhecer mais sobre o produto">(11) 99204-7052</a>
-            </div>
-            <div className="relative max-lg:w-1/2 max-lg:hidden">
-              <Image
-                src="/home4.png"
-                alt="Vercel Logo"
-                className="m-auto"
-                width={349}
-                height={559}
-                priority
-              />
-            </div>
-          </div>
           </div>
         </div>
       </div>
