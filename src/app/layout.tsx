@@ -13,6 +13,9 @@ export const metadata: Metadata = {
   title: "Conta Tempo Gestão de horas",
   description: "Acompanhe em tempo real a produtividade e engajamento do seu time.",
   keywords: ['gestão de horas, relógio de ponto, horas trabalhada, acompanhar funcionarios, monitoramento de trabalho, produtividade, bem-estar no trabalho, eficiência, acompanhamento de produtividade, engajamento da equipe, Conta Tempo'],
+  icons: {
+    icon: "./icon.png",
+  },
 };
 
 export default function RootLayout({
@@ -21,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html className={`${urbanist.variable}`} lang="pt-br">
+    <html className={`${urbanist.variable} max-lg:h-auto h-full`} lang="pt-br">
       <head>
         <Script
           strategy='lazyOnload'
@@ -39,7 +42,7 @@ export default function RootLayout({
             `}
         </Script>
         </head>
-      <body className='content-center bg-gradient-to-r from-[#f0c10a] to-[#fc001b] flex'>{children}</body>
+      <body className='max-lg:h-auto h-full content-center bg-gradient-to-r from-[#f0c10a] to-[#fc001b] flex'>{children}</body>
     </html>
   );
 }

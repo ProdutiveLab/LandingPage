@@ -69,14 +69,14 @@ export default function Home() {
   const [likes, setLikes] = useState('sobre');
 
   return (
-    <main className="max-lg:min-h-screen max-lg:mt-0 mt-8 bg-bgMain rounded-3xl container mx-auto border-white border-8 self-center shadow-lg">
-      <div className="max-lg:min-h-screen max-lg:p-4 p-8">
+    <main className="max-lg:min-h-screen max-lg:mt-0 h-5/6 relative mt-8 bg-bgMain rounded-3xl container mx-auto border-white border-8 self-center shadow-lg">
+      <div className="max-lg:min-h-screen h-full max-lg:p-4 p-8">
         <div className={`max-lg:flex-col max-lg:flex-col-reverse flex max-lg:items-center transition-all duration-500 ${likes === 'sobre' ? 'opacity-100 h-auto visible block' : 'opacity-0 p-0 h-0 invisible none'}`}>
           <div className="relative w-4/12 max-lg:w-1/2">
             <Image
               src="/home6.png"
               alt="Vercel Logo"
-              className="max-lg:relative max-lg:bottom-auto max-lg:left-auto max-lg:mt-8 max-lg:max-w-full absolute max-w-full max-w-lg -bottom-[168px] -left-[35px] h-auto"
+              className="max-lg:relative max-lg:z-0 max-lg:bottom-auto max-lg:left-auto max-lg:mt-8 max-lg:max-w-full z-10 absolute max-w-full max-w-lg -bottom-[269px] -left-[35px] h-auto"
               width={349}
               height={559}
               priority
@@ -133,7 +133,7 @@ export default function Home() {
         </div>
       </div>
       {/** bottom */}
-      <div className="max-lg:p-0 max-lg:pt-4 max-lg:sticky max-lg:bottom-0 max-lg:container bg-white overflow-hidden w-full flex justify-end items-center p-4">
+      <div className="max-lg:p-0 max-lg:pt-4 max-lg:sticky absolute bottom-0 max-lg:bottom-0 max-lg:container bg-white overflow-hidden w-full flex justify-end items-center p-4">
         <ul className="flex justify-between">
           <li className="mr-3">
             <button onClick={() => setLikes('sobre')} className={`max-lg:px-2 inline-block border border-white rounded py-2 px-4 hover:border-gray-200 ${likes === 'sobre' ? 'bg-orange text-white' : 'text-gray-400'}`}>Sobre</button>
