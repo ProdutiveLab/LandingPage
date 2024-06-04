@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Script from 'next/script'
 import { Urbanist } from "next/font/google";
+import * as gtag from './gtag.js';
 import "./globals.css";
 
 const urbanist = Urbanist({ 
@@ -26,7 +27,7 @@ export default function RootLayout({
   return (
     <html className={`${urbanist.variable} max-lg:h-auto h-full`} lang="pt-br">
       <head>
-        <Script
+        {/* <Script
           strategy='lazyOnload'
           src={`https://www.googletagmanager.com/gtag/js?id=G-LFTRE6HW2Q`}
         />
@@ -40,7 +41,25 @@ export default function RootLayout({
                 page_path: window.location.pathname,
                 });
             `}
-        </Script>
+        </Script> */}
+        <Script
+             strategy="afterInteractive"
+             src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`}
+           />
+           <Script
+             id="gtag-init"
+             strategy="afterInteractive"
+             dangerouslySetInnerHTML={{
+               __html: `
+                 window.dataLayer = window.dataLayer || [];
+                 function gtag(){dataLayer.push(arguments);}
+                 gtag('js', new Date());
+                 gtag('config', '${gtag.GA_TRACKING_ID}', {
+                   page_path: window.location.pathname,
+                 });
+               `,
+             }}
+           />
         </head>
       <body className='max-lg:h-auto h-full content-center bg-gradient-to-r from-[#f0c10a] to-[#fc001b] flex'>{children}</body>
     </html>

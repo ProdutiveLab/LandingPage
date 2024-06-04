@@ -2,6 +2,7 @@
 'use client'
 import React, { useState } from "react";
 import Image from "next/image";
+import * as gtag from './gtag.js';
 
 interface AccordionProps {
   items: { title: string; content: string }[];
@@ -16,20 +17,23 @@ const Accordion: React.FC<AccordionProps> = ({ items }) => {
   };
 
   return (
-    <div className="w-8/12 max-lg:w-full">
+    <div className="w-full max-lg:flex max-lg:flex-col pr-8 grid grid-rows-3 mb-[95px] grid-flow-col gap-4 max-lg:w-full">
       {items.map((item, index) => (
-        <div key={index} className="border-b">
+        <div key={index} className="border-b max-lg:pb-10">
           <div
-            className="cursor-pointer py-4"
-            onClick={() => handleToggle(index)}
+            className="cursor-pointer"
+            // onClick={() => handleToggle(index)}
           >
             <h2 className="text-xl">{item.title}</h2>
           </div>
-          {activeIndex === index && (
+          <div className="">
+              <p>{item.content}</p>
+          </div>
+          {/* {activeIndex === index && (
             <div className="py-4">
               <p>{item.content}</p>
             </div>
-          )}
+          )} */}
         </div>
       ))}
     </div>
@@ -94,12 +98,12 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className={`w-full ${likes === 'funcionalidades' ? 'block' : 'hidden'}`}>
+        <div className={`w-full max-h-full overflow-auto overflow-x-auto ${likes === 'funcionalidades' ? 'block' : 'hidden'}`}>
           <div className="w-full flex flex-col">
             <h1 className="max-lg:text-3xl text-4xl mb-8 drop-shadow-lg">Funcionalidades</h1>
-            <div className="flex justify-between items-center">
+           
               <Accordion items={features} />
-              <div className="relative max-lg:hidden">
+              {/* <div className="relative max-lg:hidden">
                 <Image
                   src="/home2.png"
                   alt="Vercel Logo"
@@ -108,8 +112,8 @@ export default function Home() {
                   height={559}
                   priority
                 />
-              </div>
-            </div>
+              </div> */}
+            
           </div>
         </div>
         <div className={`w-full ${likes === 'contato' ? 'block' : 'hidden'}`}>
@@ -139,13 +143,41 @@ export default function Home() {
       <div className="max-lg:p-0 max-lg:pt-4 max-lg:sticky absolute bottom-0 max-lg:bottom-0 max-lg:container bg-white overflow-hidden w-full flex justify-end items-center p-4">
         <ul className="flex justify-between">
           <li className="mr-3">
-            <button onClick={() => setLikes('sobre')} className={`max-lg:px-2 inline-block border border-white rounded py-2 px-4 hover:border-gray-200 ${likes === 'sobre' ? 'bg-orange text-white' : 'text-gray-400'}`}>Sobre</button>
+            <button onClick={() => 
+              { setLikes('sobre'), 
+              gtag.event({
+                action: 'click',
+                category: 'button',
+                label: 'menu',
+                value: 'sobre',
+              })
+            }
+              } className={`max-lg:px-2 inline-block border border-white rounded py-2 px-4 hover:border-gray-200 ${likes === 'sobre' ? 'bg-orange text-white' : 'text-gray-400'}`}>Sobre</button>
           </li>
           <li className="mr-3">
-            <button onClick={() => setLikes('funcionalidades')} className={`max-lg:px-2 inline-block border border-white rounded hover:border-gray-200 py-2 px-4 ${likes === 'funcionalidades' ? 'bg-orange text-white' : 'text-gray-400'}`}>Funcionalidades</button>
+            <button onClick={() => 
+              {
+              setLikes('funcionalidades')
+              gtag.event({
+                action: 'click',
+                category: 'button',
+                label: 'menu',
+                value: 'funcionalidades',
+              })
+              }
+              } className={`max-lg:px-2 inline-block border border-white rounded hover:border-gray-200 py-2 px-4 ${likes === 'funcionalidades' ? 'bg-orange text-white' : 'text-gray-400'}`}>Funcionalidades</button>
           </li>
           <li className="mr-3">
-            <button onClick={() => setLikes('contato')} className={`max-lg:px-2 inline-block border border-white rounded py-2 px-4 rounded hover:border-gray-200 ${likes === 'contato' ? 'bg-orange text-white' : 'text-gray-400'}`}>Contato</button>
+            <button onClick={() => {
+              setLikes('contato')
+              gtag.event({
+                action: 'click',
+                category: 'button',
+                label: 'menu',
+                value: 'contato',
+              })
+            }
+              } className={`max-lg:px-2 inline-block border border-white rounded py-2 px-4 rounded hover:border-gray-200 ${likes === 'contato' ? 'bg-orange text-white' : 'text-gray-400'}`}>Contato</button>
           </li>
         </ul>
         <span className="text-center">
