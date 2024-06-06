@@ -121,9 +121,8 @@ export default function Home() {
             <h1 className="max-lg:text-3xl text-4xl mb-8 drop-shadow-lg">Contato</h1>
             <div className="flex justify-between">
               <div>
-                <p className="py-4">Fale conosco atráves do número abaixo e entraremos em contato</p>
-                <a className="text-white rounded bg-sky-600 p-4" href="https://www.linkedin.com/company/contatempo/">linkedin</a>
-                {/* <a className="text-white rounded bg-sky-600 p-4" href="https://api.whatsapp.com/send?phone=+5511992047052&amp;text=Olá, Gostaria de conhecer mais sobre o produto">(11) 99204-7052</a> */}
+                <p className="py-4">Entre em contato conosco pelo e-mail abaixo e retornaremos o mais breve possível.</p>
+                <a className="text-white rounded bg-sky-600 p-4" href="mailto:contato@contatempo.com.br">contato@contatempo.com.br</a>
               </div>
               <div className="relative max-lg:w-1/2 max-lg:hidden">
                 <Image
