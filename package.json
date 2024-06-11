@@ -9,6 +9,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@next/third-parties": "^14.2.3",
     "next": "14.2.2",
     "npm": "^10.8.0",
     "react": "^18",

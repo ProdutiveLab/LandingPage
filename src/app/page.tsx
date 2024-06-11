@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import * as gtag from './gtag.js';
+import { GoogleTagManager, sendGTMEvent } from '@next/third-parties/google'
 
 interface AccordionProps {
   items: { title: string; content: string }[];
@@ -20,20 +21,12 @@ const Accordion: React.FC<AccordionProps> = ({ items }) => {
     <div className="w-full max-lg:flex max-lg:flex-col pr-8 grid grid-rows-3 mb-[95px] grid-flow-col gap-4 max-lg:w-full">
       {items.map((item, index) => (
         <div key={index} className="border-b max-lg:pb-10">
-          <div
-            className="cursor-pointer"
-            // onClick={() => handleToggle(index)}
-          >
+          <div className="cursor-pointer">
             <h2 className="text-xl">{item.title}</h2>
           </div>
           <div className="">
-              <p>{item.content}</p>
+            <p>{item.content}</p>
           </div>
-          {/* {activeIndex === index && (
-            <div className="py-4">
-              <p>{item.content}</p>
-            </div>
-          )} */}
         </div>
       ))}
     </div>
@@ -68,40 +61,48 @@ const features = [
     content: 'Saiba a quantidade de horas trabalhadas por cada funcionário, tanto no dia atual quanto em períodos selecionados, permitindo uma comparação e análise detalhada.'
   }
 ];
-// ${likes === 'sobre' ? 'opacity-100 h-auto visible block' : 'opacity-0 p-0 h-0 invisible none'}
-export default function Home() {
-  const [likes, setLikes] = useState('sobre');
 
+export default function Home() {
+  const [currentSection, setCurrentSection] = useState('sobre');
+
+  const showSection = (item: string) => {
+    setCurrentSection(item)
+    sendGTMEvent({ event: 'buttonClicked', value: item })
+  };
+  const sendEvent = (item: string) => {
+    sendGTMEvent({ event: 'buttonClicked', value: item })
+  };
   return (
-    <main className="max-lg:min-h-screen h-5/6 relative bg-bgMain rounded-3xl container mx-auto border-white border-8 self-center shadow-lg">
-      <div className="max-lg:min-h-screen flex items-center h-full max-lg:p-4 p-8">
-        <div className={`w-full ${likes === 'sobre' ? 'block' : 'hidden'}`}>
-          <div className={`max-lg:flex-col max-lg:flex-col-reverse flex max-lg:items-center transition-all duration-500`}>
-            <div className="relative w-6/12 max-lg:w-1/2">
-              <Image
-                src="/home6.png"
-                alt="Vercel Logo"
-                className="max-lg:relative max-lg:z-0 max-lg:bottom-auto max-lg:left-auto max-lg:mt-8 max-lg:max-w-full z-10 absolute max-w-screen-2xl -bottom-[169px] -left-[35px] h-auto"
-                width={430}
-                height={690}
-                priority
-              />
-            </div>
-            <div className="flex flex-col justify-center">
-              <div className="flex">
-                <div className="flex-1 flex flex-col">
-                  <p className="max-lg:text-2xl text-4xl mb-8 drop-shadow-lg">Acompanhe em <span className="max-lg:text-4xl text-6xl font-extrabold">tempo real</span> a <span className="max-lg:text-4xl text-6xl font-extrabold">produtividade</span> e <span className="max-lg:text-4xl text-6xl font-extrabold">engajamento</span> do seu time.</p>
-                </div>
+    <>
+      <main className="max-lg:min-h-screen h-5/6 relative bg-bgMain rounded-3xl container mx-auto border-white border-8 self-center shadow-lg">
+        <div className="max-lg:min-h-screen flex items-center h-full max-lg:p-4 p-8">
+          <div className={`w-full ${currentSection === 'sobre' ? 'block' : 'hidden'}`}>
+            <div className={`max-lg:flex-col max-lg:flex-col-reverse flex max-lg:items-center transition-all duration-500`}>
+              <div className="relative w-6/12 max-lg:w-1/2">
+                <Image
+                  src="/home6.png"
+                  alt="Vercel Logo"
+                  className="max-lg:relative max-lg:z-0 max-lg:bottom-auto max-lg:left-auto max-lg:mt-8 max-lg:max-w-full z-10 absolute max-w-screen-2xl -bottom-[169px] -left-[35px] h-auto"
+                  width={430}
+                  height={690}
+                  priority
+                />
               </div>
-              <p className="max-lg:text-lg max-lg:p-2 text-stone-600 p-8 text-2xl text-center text-white">Equilibrando eficiência e bem-estar, nossa solução de gestão de horas oferece insights que impulsionam produtividade e cuidam do seu time.</p>
-              <button className="w-auto m-auto inline-block py-2 px-4 text-white rounded bg-sky-600">Solicitar teste gratuito</button>
+              <div className="flex flex-col justify-center">
+                <div className="flex">
+                  <div className="flex-1 flex flex-col">
+                    <p className="max-lg:text-2xl text-4xl mb-8 drop-shadow-lg">Acompanhe em <span className="max-lg:text-4xl text-6xl font-extrabold">tempo real</span> a <span className="max-lg:text-4xl text-6xl font-extrabold">produtividade</span> e <span className="max-lg:text-4xl text-6xl font-extrabold">engajamento</span> do seu time.</p>
+                  </div>
+                </div>
+                <p className="max-lg:text-lg max-lg:p-2 text-stone-600 p-8 text-2xl text-center text-white">Equilibrando eficiência e bem-estar, nossa solução de gestão de horas oferece insights que impulsionam produtividade e cuidam do seu time.</p>
+                <button className="w-auto m-auto inline-block py-2 px-4 text-white rounded bg-sky-600">Solicitar teste gratuito</button>
+              </div>
             </div>
           </div>
-        </div>
-        <div className={`w-full max-h-full overflow-auto overflow-x-auto ${likes === 'funcionalidades' ? 'block' : 'hidden'}`}>
-          <div className="w-full flex flex-col">
-            <h1 className="max-lg:text-3xl text-4xl mb-8 drop-shadow-lg">Funcionalidades</h1>
-           
+          <div className={`w-full max-h-full overflow-auto overflow-x-auto ${currentSection === 'funcionalidades' ? 'block' : 'hidden'}`}>
+            <div className="w-full flex flex-col">
+              <h1 className="max-lg:text-3xl text-4xl mb-8 drop-shadow-lg">Funcionalidades</h1>
+
               <Accordion items={features} />
               {/* <div className="relative max-lg:hidden">
                 <Image
@@ -113,84 +114,58 @@ export default function Home() {
                   priority
                 />
               </div> */}
-            
+
+            </div>
           </div>
-        </div>
-        <div className={`w-full ${likes === 'contato' ? 'block' : 'hidden'}`}>
-          <div className="flex flex-col">
-            <h1 className="max-lg:text-3xl text-4xl mb-8 drop-shadow-lg">Contato</h1>
-            <div className="flex justify-between">
-              <div>
-                <p className="py-4">Entre em contato conosco pelo e-mail abaixo e retornaremos o mais breve possível.</p>
-                <a className="text-white rounded bg-sky-600 p-4" href="mailto:contato@contatempo.com.br">contato@contatempo.com.br</a>
-              </div>
-              <div className="relative max-lg:w-1/2 max-lg:hidden">
-                <Image
-                  src="/home4.png"
-                  alt="Vercel Logo"
-                  className="m-auto"
-                  width={349}
-                  height={559}
-                  priority
-                />
+          <div className={`w-full ${currentSection === 'contato' ? 'block' : 'hidden'}`}>
+            <div className="flex flex-col">
+              <h1 className="max-lg:text-3xl text-4xl mb-8 drop-shadow-lg">Contato</h1>
+              <div className="flex justify-between">
+                <div>
+                  <p className="py-4">Entre em contato conosco pelo e-mail abaixo e retornaremos o mais breve possível.</p>
+                  <a className="text-white rounded bg-sky-600 p-4" href="mailto:contato@contatempo.com.br" onClick={() => sendEvent('botao-email')}>contato@contatempo.com.br</a>
+                </div>
+                <div className="relative max-lg:w-1/2 max-lg:hidden">
+                  <Image
+                    src="/home4.png"
+                    alt="Vercel Logo"
+                    className="m-auto"
+                    width={349}
+                    height={559}
+                    priority
+                  />
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      {/** bottom */}
-      <div className="max-lg:p-0 max-lg:pt-4 max-lg:sticky absolute bottom-0 max-lg:bottom-0 max-lg:container bg-white overflow-hidden w-full flex justify-end items-center p-4">
-        <ul className="flex justify-between">
-          <li className="mr-3">
-            <button onClick={() => 
-              { setLikes('sobre'), 
-              gtag.event({
-                action: 'click',
-                category: 'button',
-                label: 'menu',
-                value: 'sobre',
-              })
-            }
-              } className={`max-lg:px-2 inline-block border border-white rounded py-2 px-4 hover:border-gray-200 ${likes === 'sobre' ? 'bg-orange text-white' : 'text-gray-400'}`}>Sobre</button>
-          </li>
-          <li className="mr-3">
-            <button onClick={() => 
-              {
-              setLikes('funcionalidades')
-              gtag.event({
-                action: 'click',
-                category: 'button',
-                label: 'menu',
-                value: 'funcionalidades',
-              })
-              }
-              } className={`max-lg:px-2 inline-block border border-white rounded hover:border-gray-200 py-2 px-4 ${likes === 'funcionalidades' ? 'bg-orange text-white' : 'text-gray-400'}`}>Funcionalidades</button>
-          </li>
-          <li className="mr-3">
-            <button onClick={() => {
-              setLikes('contato')
-              gtag.event({
-                action: 'click',
-                category: 'button',
-                label: 'menu',
-                value: 'contato',
-              })
-            }
-              } className={`max-lg:px-2 inline-block border border-white rounded py-2 px-4 rounded hover:border-gray-200 ${likes === 'contato' ? 'bg-orange text-white' : 'text-gray-400'}`}>Contato</button>
-          </li>
-        </ul>
-        <span className="text-center">
-          <Image
-            src="/contaTempo.png"
-            alt="Vercel Logo"
-            className="relative"
-            width={259}
-            height={62}
-            priority
-          />
-          <p className="max-lg:text-sm text-lg text-gray-400">Gestão de horas</p>
-        </span>
-      </div>
-    </main>
+        {/** bottom */}
+        <div className="max-lg:p-0 max-lg:pt-4 max-lg:sticky absolute bottom-0 max-lg:bottom-0 max-lg:container bg-white overflow-hidden w-full flex justify-end items-center p-4">
+          <ul className="flex justify-between">
+            <li className="mr-3">
+              <button onClick={() => showSection('sobre')} className={`max-lg:px-2 inline-block border border-white rounded py-2 px-4 hover:border-gray-200 ${currentSection === 'sobre' ? 'bg-orange text-white' : 'text-gray-400'}`}>Sobre</button>
+            </li>
+            <li className="mr-3">
+              <button onClick={() => showSection('funcionalidades')} className={`max-lg:px-2 inline-block border border-white rounded hover:border-gray-200 py-2 px-4 ${currentSection === 'funcionalidades' ? 'bg-orange text-white' : 'text-gray-400'}`}>Funcionalidades</button>
+            </li>
+            <li className="mr-3">
+              <button onClick={() => showSection('contato')} className={`max-lg:px-2 inline-block border border-white rounded py-2 px-4 rounded hover:border-gray-200 ${currentSection === 'contato' ? 'bg-orange text-white' : 'text-gray-400'}`}>Contato</button>
+            </li>
+          </ul>
+          <span className="text-center">
+            <Image
+              src="/contaTempo.png"
+              alt="Vercel Logo"
+              className="relative"
+              width={259}
+              height={62}
+              priority
+            />
+            <p className="max-lg:text-sm text-lg text-gray-400">Gestão de horas</p>
+          </span>
+        </div>
+      </main>
+      <GoogleTagManager gtmId={gtag.GA_TRACKING_ID} />
+    </>
   );
 }
