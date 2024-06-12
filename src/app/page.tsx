@@ -70,7 +70,8 @@ export default function Home() {
     sendGTMEvent({ event: 'buttonClicked', value: item })
   };
   const sendEvent = (item: string) => {
-    sendGTMEvent({ event: 'buttonClicked', value: item })
+    // sendGTMEvent({ event: 'buttonClicked', value: item })
+    sendGTMEvent({ event: 'conversion', send_to: 'AW-956394026/pNnrCM-gi7kZEKrUhcgD'})
   };
   return (
     <>
