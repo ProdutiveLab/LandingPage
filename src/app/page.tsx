@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import * as gtag from './gtag.js';
-import { GoogleTagManager, sendGTMEvent } from '@next/third-parties/google'
 
 interface AccordionProps {
   items: { title: string; content: string }[];
@@ -67,11 +66,18 @@ export default function Home() {
 
   const showSection = (item: string) => {
     setCurrentSection(item)
-    sendGTMEvent({ event: 'buttonClicked', value: item })
+    gtag.event({
+      action: 'click-menu',
+      category: 'Button',
+      label: item,
+      value: 1,
+    });
   };
   const sendEvent = (item: string) => {
-    // sendGTMEvent({ event: 'buttonClicked', value: item })
-    sendGTMEvent({ event: 'conversion', send_to: 'AW-956394026/pNnrCM-gi7kZEKrUhcgD'})
+    gtag.eventConversion({
+      action: 'conversion',
+      label: item,
+    });
   };
   return (
     <>
@@ -166,7 +172,7 @@ export default function Home() {
           </span>
         </div>
       </main>
-      <GoogleTagManager gtmId={gtag.GA_TRACKING_ID} />
+      {/* <GoogleTagManager gtmId={gtag.GA_TRACKING_ID} /> */}
     </>
   );
 }
