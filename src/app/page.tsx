@@ -102,7 +102,7 @@ export default function Home() {
                   </div>
                 </div>
                 <p className="max-lg:text-lg max-lg:p-2 text-stone-600 p-8 text-2xl text-center text-white">Equilibrando eficiência e bem-estar, nossa solução de gestão de horas oferece insights que impulsionam produtividade e cuidam do seu time.</p>
-                <button className="w-auto m-auto inline-block py-2 px-4 text-white rounded bg-sky-600">Solicitar teste gratuito</button>
+                <button onClick={() => showSection('contato')} className="w-auto m-auto inline-block py-2 px-4 text-white rounded bg-sky-600">Solicitar teste gratuito</button>
               </div>
             </div>
           </div>
