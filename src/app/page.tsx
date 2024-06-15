@@ -1,34 +1,29 @@
 
 'use client'
-import React, { useState } from "react";
+import React, { ReactNode, useState } from "react";
 import Image from "next/image";
 import * as gtag from './gtag.js';
+import { HomeIllustrations, TotalHoras, AppUsados, JornadaDiaria, AlertaBournout, Relatorios, Ranking } from './illustrations'
 
 interface AccordionProps {
-  items: { title: string; content: string }[];
+  items: { title: string; content: string;   component: ReactNode; }[];
 }
 
 
-const Accordion: React.FC<AccordionProps> = ({ items }) => {
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
-  const handleToggle = (index: number) => {
-    setActiveIndex(activeIndex === index ? null : index);
-  };
+const Accordion: React.FC<AccordionProps> = ({ items }) => {
+
 
   return (
-    <div className="w-full max-lg:flex max-lg:flex-col pr-8 grid grid-rows-3 mb-[95px] grid-flow-col gap-4 max-lg:w-full">
+    <>
       {items.map((item, index) => (
-        <div key={index} className="border-b max-lg:pb-10">
-          <div className="cursor-pointer">
-            <h2 className="text-xl">{item.title}</h2>
-          </div>
-          <div className="">
-            <p>{item.content}</p>
-          </div>
+        <div key={index} className="text-center max-md:pb-10">
+          <div className="w-2/4 mx-auto">{item.component}</div>
+            <h2 className="text-xl text-orange-ct">{item.title}</h2>
+            <p className="text-text-ct font-semibold p-8">{item.content}</p>
         </div>
       ))}
-    </div>
+    </>
   );
 };
 
@@ -37,142 +32,81 @@ const Accordion: React.FC<AccordionProps> = ({ items }) => {
 const features = [
   {
     title: 'Total de Horas Trabalhadas',
-    content: 'Obtenha uma visão em tempo real do total de horas trabalhadas pela sua equipe, com a possibilidade de visualizar os dados diários, semanais e mensais.'
+    content: 'Obtenha uma visão em tempo real do total de horas trabalhadas pela sua equipe, com a possibilidade de visualizar os dados diários, semanais e mensais.',
+    component: <TotalHoras />
   },
   {
     title: 'Aplicativos Mais Usados',
-    content: 'Veja os aplicativos mais utilizados pela sua equipe para entender melhor seus hábitos de trabalho.'
-  },
-  {
-    title: 'Jornada Diária',
-    content: 'Acompanhe a jornada diária de cada colaborador, desde o início dos trabalhos até a última atividade do dia. Veja os aplicativos mais utilizados, as principais tarefas realizadas (aquelas que consumiram mais tempo) e navegue por uma linha do tempo detalhada para obter um panorama completo do dia.'
-  },
-  {
-    title: 'Alerta de Desgaste (Burnout)',
-    content: 'Receba alertas caso algum colaborador esteja sobrecarregado, trabalhando mais horas do que o recomendável, ajudando a prevenir o burnout.'
+    content: 'Veja os aplicativos mais utilizados pela sua equipe para entender melhor seus hábitos de trabalho.',
+    component: <AppUsados />
   },
   {
     title: 'Relatórios Automáticos',
-    content: 'Receba um compilado de dados diretamente no seu e-mail semanalmente, facilitando o acompanhamento contínuo da produtividade.'
+    content: 'Receba um compilado de dados diretamente no seu e-mail semanalmente, facilitando o acompanhamento contínuo da produtividade.',
+    component: <Relatorios />
+  },
+  {
+    title: 'Jornada Diária',
+    content: 'Acompanhe a jornada diária de cada colaborador, desde o início dos trabalhos até a última atividade do dia. Veja os aplicativos mais utilizados, as principais tarefas realizadas (aquelas que consumiram mais tempo) e navegue por uma linha do tempo detalhada para obter um panorama completo do dia.',
+    component: <JornadaDiaria />
+  },
+  {
+    title: 'Alerta de Desgaste (Burnout)',
+    content: 'Receba alertas caso algum colaborador esteja sobrecarregado, trabalhando mais horas do que o recomendável, ajudando a prevenir o burnout.',
+    component: <AlertaBournout />
   },
   {
     title: 'Ranking de Colaboradores',
-    content: 'Saiba a quantidade de horas trabalhadas por cada funcionário, tanto no dia atual quanto em períodos selecionados, permitindo uma comparação e análise detalhada.'
+    content: 'Saiba a quantidade de horas trabalhadas por cada funcionário, tanto no dia atual quanto em períodos selecionados, permitindo uma comparação e análise detalhada.',
+    component: <Ranking />
   }
 ];
 
-export default function Home() {
-  const [currentSection, setCurrentSection] = useState('sobre');
 
-  const showSection = (item: string) => {
-    setCurrentSection(item)
-    gtag.event({
-      action: 'click-menu',
-      category: 'Button',
-      label: item,
-      value: 1,
-    });
-  };
-  const sendEvent = (item: string) => {
-    gtag.eventConversion({
-      action: 'conversion',
-      label: item,
-    });
-  };
+
+
+export default function Home() {
+
   return (
     <>
-      <main className="max-lg:min-h-screen h-5/6 relative bg-bgMain rounded-3xl container mx-auto border-white border-8 self-center shadow-lg">
-        <div className="max-lg:min-h-screen flex items-center h-full max-lg:p-4 p-8">
-          <div className={`w-full ${currentSection === 'sobre' ? 'block' : 'hidden'}`}>
-            <div className={`max-lg:flex-col max-lg:flex-col-reverse flex max-lg:items-center transition-all duration-500`}>
-              <div className="relative w-6/12 max-lg:w-1/2">
-                <Image
-                  src="/home6.png"
-                  alt="Vercel Logo"
-                  className="max-lg:relative max-lg:z-0 max-lg:bottom-auto max-lg:left-auto max-lg:mt-8 max-lg:max-w-full z-10 absolute max-w-screen-2xl -bottom-[169px] -left-[35px] h-auto"
-                  width={430}
-                  height={690}
-                  priority
-                />
-              </div>
-              <div className="flex flex-col justify-center">
-                <div className="flex">
-                  <div className="flex-1 flex flex-col">
-                    <p className="max-lg:text-2xl text-4xl mb-8 drop-shadow-lg">Acompanhe em <span className="max-lg:text-4xl text-6xl font-extrabold">tempo real</span> a <span className="max-lg:text-4xl text-6xl font-extrabold">produtividade</span> e <span className="max-lg:text-4xl text-6xl font-extrabold">engajamento</span> do seu time.</p>
-                  </div>
-                </div>
-                <p className="max-lg:text-lg max-lg:p-2 text-stone-600 p-8 text-2xl text-center text-white">Equilibrando eficiência e bem-estar, nossa solução de gestão de horas oferece insights que impulsionam produtividade e cuidam do seu time.</p>
-                <button onClick={() => showSection('contato')} className="w-auto m-auto inline-block py-2 px-4 text-white rounded bg-sky-600">Solicitar teste gratuito</button>
-              </div>
-            </div>
-          </div>
-          <div className={`w-full max-h-full overflow-auto overflow-x-auto ${currentSection === 'funcionalidades' ? 'block' : 'hidden'}`}>
-            <div className="w-full flex flex-col">
-              <h1 className="max-lg:text-3xl text-4xl mb-8 drop-shadow-lg">Funcionalidades</h1>
-
-              <Accordion items={features} />
-              {/* <div className="relative max-lg:hidden">
-                <Image
-                  src="/home2.png"
-                  alt="Vercel Logo"
-                  className="m-auto"
-                  width={349}
-                  height={559}
-                  priority
-                />
-              </div> */}
-
-            </div>
-          </div>
-          <div className={`w-full ${currentSection === 'contato' ? 'block' : 'hidden'}`}>
-            <div className="flex flex-col">
-              <h1 className="max-lg:text-3xl text-4xl mb-8 drop-shadow-lg">Contato</h1>
-              <div className="flex justify-between">
-                <div>
-                  <p className="py-4">Entre em contato conosco pelo e-mail abaixo e retornaremos o mais breve possível.</p>
-                  <a className="text-white rounded bg-sky-600 p-4" href="mailto:contato@contatempo.com.br" onClick={() => sendEvent('botao-email')}>contato@contatempo.com.br</a>
-                </div>
-                <div className="relative max-lg:w-1/2 max-lg:hidden">
-                  <Image
-                    src="/home4.png"
-                    alt="Vercel Logo"
-                    className="m-auto"
-                    width={349}
-                    height={559}
-                    priority
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
+      <header className="bg-white drop-shadow-xl">
+        <div className="container max-w-screen-xl mx-auto py-4">
+          <Image
+            src="/contaTempo.png"
+            alt="Vercel Logo"
+            className="relative"
+            width={139}
+            height={30}
+            priority
+          />
         </div>
-        {/** bottom */}
-        <div className="max-lg:p-0 max-lg:pt-4 max-lg:sticky absolute bottom-0 max-lg:bottom-0 max-lg:container bg-white overflow-hidden w-full flex justify-end items-center p-4">
-          <ul className="flex justify-between">
-            <li className="mr-3">
-              <button onClick={() => showSection('sobre')} className={`max-lg:px-2 inline-block border border-white rounded py-2 px-4 hover:border-gray-200 ${currentSection === 'sobre' ? 'bg-orange text-white' : 'text-gray-400'}`}>Sobre</button>
-            </li>
-            <li className="mr-3">
-              <button onClick={() => showSection('funcionalidades')} className={`max-lg:px-2 inline-block border border-white rounded hover:border-gray-200 py-2 px-4 ${currentSection === 'funcionalidades' ? 'bg-orange text-white' : 'text-gray-400'}`}>Funcionalidades</button>
-            </li>
-            <li className="mr-3">
-              <button onClick={() => showSection('contato')} className={`max-lg:px-2 inline-block border border-white rounded py-2 px-4 rounded hover:border-gray-200 ${currentSection === 'contato' ? 'bg-orange text-white' : 'text-gray-400'}`}>Contato</button>
-            </li>
-          </ul>
-          <span className="text-center">
-            <Image
-              src="/contaTempo.png"
-              alt="Vercel Logo"
-              className="relative"
-              width={259}
-              height={62}
-              priority
-            />
-            <p className="max-lg:text-sm text-lg text-gray-400">Gestão de horas</p>
-          </span>
+      </header>
+      <main className="bg-orange p-10 max-md:p-4">
+        <div className="container p-10 max-md:p-4 max-w-screen-xl mx-auto bg-white drop-shadow-xl flex flex-row items-center max-md:flex-col ">
+          <div className="max-md:basis-full max-md:w-3/5 basis-1/4 relative">
+            <HomeIllustrations />
+          </div>
+          <div className="basis-3/4 pl-8 max-md:p-0">
+            <h2 className="text-5xl font-extrabold text-text-ct pr-8">Acompanhe em tempo real a <span className="text-orange-ct">produtividade</span> e <span className="text-orange-ct">engajamento</span> do seu time.</h2>
+            <p className="text-2xl my-8 text-text-ct">Equilibrando eficiência e bem-estar, nossa solução de gestão de horas oferece insights que impulsionam produtividade e cuidam do seu time.</p>
+            <button className="max-md:block max-md:w-full w-auto inline-block py-2 px-4 text-white rounded bg-sky-600 border-2 border-sky-600 text-xl uppercase">Solicite uma demonstração</button>
+            <button className="max-md:block max-md:w-full max-md:px-0 max-md:ml-0 max-md:mt-4 w-auto ml-8 inline-block py-2 px-4 text-sky-600 rounded bg-white border-2 border-sky-600 text-lg uppercase">Conheça as funcionalidades</button>
+          </div>
         </div>
       </main>
-      {/* <GoogleTagManager gtmId={gtag.GA_TRACKING_ID} /> */}
+      <div className="bg-neutral-100">
+        <div className="container py-10 max-w-screen-xl mx-auto drop-shadow-xl flex-row items-center">
+          <div className="max-md:grid-cols-1 grid grid-cols-3 gap-10">
+            <Accordion items={features} />
+          </div>
+        </div>
+      </div>
+      <div className="bg-white">
+        <div className="container py-10 max-w-screen-xl mx-auto drop-shadow-xl flex-row items-center">
+          <h2>Monitorar a produtividade e bem estar dos seus colaboradores custa pouco</h2>
+          <p>Desbloqueie o potencial máximo da sua equipe com o ContaTempo.</p>
+        </div>
+      </div>
     </>
   );
 }

@@ -18,6 +18,10 @@ const config: Config = {
         '3xl': '-5px 10px 5px 2px rgba(0, 0, 0, 0.75)',
         //-5px 10px 5px 2px rgba(0,0,0,0.75)
       },
+      textColor: {
+        'orange-ct': '#ff5522',
+        'text-ct': '#454545',
+      },
       colors: {
         transparent: 'transparent',
         current: 'currentColor',
@@ -26,6 +30,10 @@ const config: Config = {
       },
       spacing: {
         '-7px': '-7px',
+      },
+      // box-shadow: -4px 4px 16px 0px rgba(0, 0, 0, 0.25);
+      dropShadow: {
+        '3xl': '-4px 4px 16px 0px rgba(0, 0, 0, 0.25)',
       }
     },
   },

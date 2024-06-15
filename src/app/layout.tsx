@@ -24,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html className={`${urbanist.variable} max-lg:h-auto h-full`} lang="pt-br">
+    <html className={`${urbanist.variable}`} lang="pt-br">
        <head>
         <Script
           strategy='lazyOnload'
@@ -41,7 +41,7 @@ export default function RootLayout({
         </Script>
        
         </head>
-      <body className='max-lg:h-auto h-full content-center bg-gradient-to-r from-[#f0c10a] to-[#fc001b] flex'>{children}</body>
+      {<body className="bg-white"/* className='max-lg:h-auto h-full content-center bg-gradient-to-r from-[#f0c10a] to-[#fc001b] flex' */>{children}</body>}
     </html>
   );
 }
