@@ -20,7 +20,7 @@ const config: Config = {
       },
       textColor: {
         'orange-ct': '#ff5522',
-        'text-ct': '#454545',
+        'text-color-ct': '#454545',
       },
       colors: {
         transparent: 'transparent',
