@@ -1,12 +1,11 @@
 'use client'
 import React, { ReactNode, useState } from "react";
 import Image from "next/image";
-import * as gtag from './gtag.js';
 import { HomeIllustrations, TotalHoras, AppUsados, JornadaDiaria, AlertaBournout, Relatorios, Ranking } from './Components/illustrations'
 import ContactForm from './Components/form'
 
 interface AccordionProps {
-  items: { title: string; content: string;   component: ReactNode; }[];
+  items: { title: string; content: string; component: ReactNode; }[];
 }
 
 const Accordion: React.FC<AccordionProps> = ({ items }) => {
@@ -15,9 +14,9 @@ const Accordion: React.FC<AccordionProps> = ({ items }) => {
     <>
       {items.map((item, index) => (
         <div key={index} className="text-center">
-          <div className="w-2/4 mx-auto">{item.component}</div>
-            <h2 className="text-xl text-orange-ct">{item.title}</h2>
-            <p className="text-text-color-ct font-semibold p-8">{item.content}</p>
+          <div className="w-2/4 mx-auto drop-shadow-md">{item.component}</div>
+          <h2 className="text-xl text-orange-ct">{item.title}</h2>
+          <p className="text-secondary-ct p-2">{item.content}</p>
         </div>
       ))}
     </>
@@ -30,6 +29,7 @@ interface Plans {
     usersLength: string;
     value: string;
     period: string;
+    type: string;
     button: string;
   }[]
 }
@@ -42,8 +42,9 @@ const Plans: React.FC<Plans> = ({ items }) => {
         <div key={index} className="text-center rounded px-4 py-8 border border-neutral-300 hover:border-sky-600">
           <h3 className="text-xl text-orange-ct font-semibold uppercase">{item.planName}</h3>
           <h2 className="text-md font-bold text-sky-500">{item.usersLength}</h2>
-          <p className="text-text-color-ct my-10 font-bold text-4xl">{item.value}<span className="text-neutral-400 font-bold text-lg">{item.period}</span></p>
-          {item.button && (<button className="block w-full py-2 px-4 text-sky-600 rounded bg-white border-2 border-sky-600 text-lg uppercase">{item.button}</button>)}
+          <p className="text-secondary-ct mt-10 font-bold text-4xl">{item.value}<span className="text-neutral-300 font-bold text-lg">{item.period}</span></p>
+          <p className="text-secondary-ct text-base">{item.type}</p>
+          {item.button && (<button className="block mt-10 w-full py-2 px-4 text-sky-600 rounded bg-white border-2 border-sky-600 text-base uppercase">{item.button}</button>)}
         </div>
       ))}
     </>
@@ -92,8 +93,9 @@ const plans = [
   {
     planName: 'Pequena empresa',
     usersLength: 'Até 10 usuários',
-    value: `R$ 11,99`,
+    value: 'R$ 11,99',
     period: '/mês',
+    type: 'Por usuário',
     button: ''
 
   },
@@ -102,6 +104,7 @@ const plans = [
     usersLength: 'Até 50 usuários',
     value: 'R$ 9,99',
     period: '/mês',
+    type: 'Por usuário',
     button: ''
   },
   {
@@ -109,6 +112,7 @@ const plans = [
     usersLength: 'Até 100 usuários',
     value: 'R$ 7,99',
     period: '/mês',
+    type: 'Por usuário',
     button: ''
   },
   {
@@ -116,6 +120,7 @@ const plans = [
     usersLength: '100 ou mais usuários',
     value: 'Consulte',
     period: '',
+    type: '',
     button: 'Entre em contato'
   }
 ]
@@ -125,7 +130,7 @@ const plans = [
 
 export default function Home() {
 
-  const handleScroll = (e:  React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     e.preventDefault();
     const targetId = e.currentTarget.getAttribute('href')!.substring(1);
     const targetElement = document.getElementById(targetId);
@@ -139,33 +144,35 @@ export default function Home() {
 
   return (
     <>
-      <header className="bg-white drop-shadow-xl max-lg:p-4 py-6 px-10 fixed w-full top-0 z-10">
-        <div className="container max-lg:p-2 max-w-screen-xl mx-auto bg-white flex flex-row">
+      <header className="bg-white drop-shadow-xl max-lg:p-2 py-4 px-10 fixed w-full top-0 z-10">
+        <div className="container max-lg:p-2 max-w-screen-xl mx-auto bg-white items-center flex justify-between">
           <Image
             src="/contaTempo.png"
             alt="Vercel Logo"
-            className="relative"
+            className="relative w-auto h-[30px]"
             width={139}
             height={30}
             priority
           />
+          <a href="https://app.contatempo.com.br/" target="_blank" className="p-2 text-white rounded bg-sky-600 border-sky-600">Acessar conta</a>
         </div>
       </header>
-      <main className="bg-orange mt-[77px] p-10 max-lg:p-4">
-        <div className="container max-lg:p-4 p-4 max-w-screen-xl mx-auto bg-white drop-shadow-xl flex flex-row items-center max-lg:flex-col">
+      <main className="bg-orange mt-[73px] p-10 max-lg:p-4 max-lg:py-8">
+        <div className="container p-4 max-w-screen-xl mx-auto bg-white drop-shadow-xl flex flex-row items-center max-lg:flex-col">
           <div className="max-lg:basis-full max-lg:w-3/5 basis-1/4 relative">
             <HomeIllustrations />
           </div>
           <div className="basis-3/4 pl-8 max-lg:p-0">
             <h2 className="text-5xl font-extrabold text-text-color-ct pr-8">Acompanhe em tempo real a <span className="text-orange-ct">produtividade</span> e <span className="text-orange-ct">engajamento</span> do seu time.</h2>
-            <p className="text-2xl my-8 text-text-color-ct">Equilibrando eficiência e bem-estar, nossa solução de gestão de horas oferece insights que impulsionam produtividade e cuidam do seu time.</p>
-            <a href="#form" onClick={(e) => handleScroll(e)} className="max-lg:block max-lg:w-full w-auto inline-block py-2 px-4 text-white rounded bg-sky-600 border-2 border-sky-600 text-xl uppercase">Solicite uma demonstração</a>
-            <a href="#features" onClick={(e) => handleScroll(e)} className="max-lg:block max-lg:w-full max-lg:px-0 max-lg:ml-0 max-lg:mt-4 w-auto ml-8 inline-block py-2 px-4 text-sky-600 rounded bg-white border-2 border-sky-600 text-lg uppercase">Conheça as funcionalidades</a>
+            <p className="text-2xl my-8 text-secondary-ct">Equilibrando eficiência e bem-estar, nossa solução de gestão de horas oferece insights que impulsionam produtividade e cuidam do seu time.</p>
+            <a href="#form" onClick={(e) => handleScroll(e)} className="max-lg:block max-lg:w-full w-auto inline-block py-2 px-4 text-white rounded bg-sky-600 border-2 border-sky-600 text-base uppercase">Solicite uma demonstração</a>
+            <a href="#features" onClick={(e) => handleScroll(e)} className="max-lg:block max-lg:w-full max-lg:ml-0 max-lg:mt-4 w-auto ml-4 inline-block py-2 px-4 text-sky-600 rounded bg-white border-2 border-sky-600 text-base uppercase">Conheça as funcionalidades</a>
           </div>
+          <div className="max-lg:hidden w-1/5 relative"></div>
         </div>
       </main>
       <div id="features" className="bg-neutral-100">
-        <div className="container px-4 py-10 max-w-screen-xl mx-auto drop-shadow-lg flex-row items-center">
+        <div className="container px-4 py-10 max-w-screen-xl mx-auto flex-row items-center">
           <div className="max-lg:grid-cols-1 grid grid-cols-3 gap-10">
             <Accordion items={features} />
           </div>

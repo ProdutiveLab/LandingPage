@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import { Urbanist } from "next/font/google";
+import { Source_Sans_3 } from "next/font/google";
 import Script from 'next/script'
+import * as gtag from './gtag.js';
 import "./globals.css";
 
-const urbanist = Urbanist({ 
+const urbanist = Source_Sans_3({ 
   subsets: ["latin"],
   variable: '--font-main'
 });
@@ -28,7 +29,7 @@ export default function RootLayout({
        <head>
         <Script
           strategy='lazyOnload'
-          src={`https://www.googletagmanager.com/gtag/js?id=G-LFTRE6HW2Q`}
+          src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`}
         />
         <Script id='' strategy='lazyOnload'>
           {`
@@ -36,7 +37,7 @@ export default function RootLayout({
                function gtag()
                {dataLayer.push(arguments);}
                 gtag('js', new Date()); 
-                gtag('config', 'G-LFTRE6HW2Q');
+                gtag('config', '${gtag.GA_TRACKING_ID}');
             `}
         </Script>
        

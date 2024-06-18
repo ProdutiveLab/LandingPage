@@ -21,6 +21,7 @@ const config: Config = {
       textColor: {
         'orange-ct': '#ff5522',
         'text-color-ct': '#454545',
+        'secondary-ct': '#777777',
       },
       colors: {
         transparent: 'transparent',
