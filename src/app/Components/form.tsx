@@ -35,7 +35,7 @@ const ContactForm: React.FC = () => {
     setSuccess(null);
 
     const { nome, email, empresa, quantidade, telefone } = formData;
-    console.log(formData)
+  
     if (!nome || !email || !empresa || !telefone) {
       setError('Todos os campos são obrigatórios');
       return;
@@ -55,7 +55,16 @@ const ContactForm: React.FC = () => {
       }
 
       const result = await response.json();
-      setSuccess(result.message);
+      setSuccess('Obrigado pos sua mensagem, logo entraremos em contato.');
+       // Limpar o formulário após sucesso no envio
+       setFormData({
+        nome: '',
+        email: '',
+        empresa: '',
+        quantidade: '',
+        telefone: '',
+      });
+      
       gtag.eventConversion({
         action: 'conversion',
         label: 'send-form',
@@ -89,7 +98,7 @@ const ContactForm: React.FC = () => {
                 <input className='w-full text-secondary-ct focus:outline-none' placeholder='Sua Empresa' id="empresa" value={formData.empresa} onChange={handleChange} />
               </label>
               <label className='block border-b p-2 border-orange mb-4' htmlFor="quantidade">
-                <input className='w-full text-secondary-ct focus:outline-none' placeholder='Quantidade de funcionários' id="quantidade" value={formData.empresa} onChange={handleChange} />
+                <input className='w-full text-secondary-ct focus:outline-none' placeholder='Quantidade de funcionários' id="quantidade" value={formData.quantidade} onChange={handleChange} />
               </label>
               <label className='block border-b p-2 border-orange mb-4' htmlFor="telefone">
                 <input className='w-full text-secondary-ct focus:outline-none' placeholder='DDD + Celular' id="telefone" value={formData.telefone} onChange={handleChange} />

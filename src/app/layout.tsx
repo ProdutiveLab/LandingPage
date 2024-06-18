@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Source_Sans_3 } from "next/font/google";
 import Script from 'next/script'
 import * as gtag from './gtag.js';
@@ -8,6 +8,10 @@ const urbanist = Source_Sans_3({
   subsets: ["latin"],
   variable: '--font-main'
 });
+
+export const viewport: Viewport = {
+  themeColor: '#ff5522',
+}
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.contatempo.com.br/"),

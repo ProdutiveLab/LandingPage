@@ -188,6 +188,11 @@ export default function Home() {
         </div>
       </div>
       <ContactForm />
+      <div className="bg-white">
+        <div className="container p-2 max-w-screen-xl mx-auto text-left">
+          <p className="text-text-color-ct">Um produto: <a href="#" className="text-orange-ct">PLab</a> - Design por: <a href="#" className="text-orange-ct">Guilherme Moreira</a></p>
+        </div>
+      </div>
     </>
   );
 }
