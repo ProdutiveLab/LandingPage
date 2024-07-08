@@ -3,8 +3,9 @@ import React, { ReactNode, useState } from "react";
 import Image from "next/image";
 import { HomeIllustrations, TotalHoras, AppUsados, JornadaDiaria, AlertaBournout, Relatorios, Ranking } from './Components/illustrations'
 import ContactForm from './Components/form'
+import Header from './Components/header'
 
-interface AccordionProps {
+type AccordionProps = {
   items: { title: string; content: string; component: ReactNode; }[];
 }
 
@@ -23,7 +24,7 @@ const Accordion: React.FC<AccordionProps> = ({ items }) => {
   );
 };
 
-interface Plans {
+type Plans = {
   items: {
     planName: string;
     usersLength: string;
@@ -144,19 +145,7 @@ export default function Home() {
 
   return (
     <>
-      <header className="bg-white drop-shadow-xl max-lg:p-2 py-4 px-10 fixed w-full top-0 z-10">
-        <div className="container max-lg:p-2 max-w-screen-xl mx-auto bg-white items-center flex justify-between">
-          <Image
-            src="/contaTempo.png"
-            alt="Vercel Logo"
-            className="relative w-auto h-[30px]"
-            width={139}
-            height={30}
-            priority
-          />
-          <a href="https://app.contatempo.com.br/" target="_blank" className="p-2 text-white rounded bg-sky-600 border-sky-600">Acessar conta</a>
-        </div>
-      </header>
+      <Header />
       <main className="bg-orange mt-[73px] p-10 max-lg:p-4 max-lg:py-8">
         <div className="container p-4 max-w-screen-xl mx-auto bg-white drop-shadow-xl flex flex-row items-center max-lg:flex-col">
           <div className="max-lg:basis-full max-lg:w-3/5 basis-1/4 relative">

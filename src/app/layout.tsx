@@ -4,7 +4,7 @@ import Script from 'next/script'
 import * as gtag from './gtag.js';
 import "./globals.css";
 
-const urbanist = Source_Sans_3({ 
+const SourceSans3 = Source_Sans_3({ 
   subsets: ["latin"],
   variable: '--font-main'
 });
@@ -29,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html className={`${urbanist.variable}`} lang="pt-br">
+    <html className={`${SourceSans3.variable}`} lang="pt-br">
        <head>
         <Script
           strategy='lazyOnload'
