@@ -44,8 +44,8 @@ const Plans: React.FC<Plans> = ({ items }) => {
           <h3 className="text-xl text-orange-ct font-semibold uppercase">{item.planName}</h3>
           <h2 className="text-md font-bold text-sky-500">{item.usersLength}</h2>
           <p className="text-secondary-ct mt-10 font-bold text-4xl">{item.value}<span className="text-neutral-300 font-bold text-lg">{item.period}</span></p>
-          <p className="text-secondary-ct text-base">{item.type}</p>
-          {item.button && (<button className="block mt-10 w-full py-2 px-4 text-sky-600 rounded bg-white border-2 border-sky-600 text-base uppercase">{item.button}</button>)}
+          <p className="text-secondary-ct text-base">{item.type}&nbsp;</p>
+          {item.button && (<a href="https://app.contatempo.com.br/cadastro" target="_blank" className="block mt-10 w-full py-2 px-4 text-sky-600 rounded bg-white border-2 border-sky-600 text-base uppercase">{item.button}</a>)}
         </div>
       ))}
     </>
@@ -97,8 +97,7 @@ const plans = [
     value: 'R$ 11,99',
     period: '/mês',
     type: 'Por usuário',
-    button: ''
-
+    button: 'Cadastre-se para teste grátis'
   },
   {
     planName: 'Empresa em expansão',
@@ -106,7 +105,7 @@ const plans = [
     value: 'R$ 9,99',
     period: '/mês',
     type: 'Por usuário',
-    button: ''
+    button: 'Cadastre-se para teste grátis'
   },
   {
     planName: 'Corporativo',
@@ -114,7 +113,7 @@ const plans = [
     value: 'R$ 7,99',
     period: '/mês',
     type: 'Por usuário',
-    button: ''
+    button: 'Cadastre-se para teste grátis'
   },
   {
     planName: 'Sob medida',
@@ -122,7 +121,7 @@ const plans = [
     value: 'Consulte',
     period: '',
     type: '',
-    button: 'Entre em contato'
+    button: 'Cadastre-se para teste grátis'
   }
 ]
 
@@ -154,8 +153,8 @@ export default function Home() {
           <div className="basis-3/4 pl-8 max-lg:p-0">
             <h2 className="text-5xl font-extrabold text-text-color-ct pr-8">Acompanhe em tempo real a <span className="text-orange-ct">produtividade</span> e <span className="text-orange-ct">engajamento</span> do seu time.</h2>
             <p className="text-2xl my-8 text-secondary-ct">Equilibrando eficiência e bem-estar, nossa solução de gestão de horas oferece insights que impulsionam produtividade e cuidam do seu time.</p>
-            <a href="#form" onClick={(e) => handleScroll(e)} className="max-lg:block max-lg:w-full w-auto inline-block py-2 px-4 text-white rounded bg-sky-600 border-2 border-sky-600 text-base uppercase">Solicite uma demonstração</a>
-            <a href="#features" onClick={(e) => handleScroll(e)} className="max-lg:block max-lg:w-full max-lg:ml-0 max-lg:mt-4 w-auto ml-4 inline-block py-2 px-4 text-sky-600 rounded bg-white border-2 border-sky-600 text-base uppercase">Conheça as funcionalidades</a>
+            <a href="https://app.contatempo.com.br/cadastro" target="_blank" className="max-lg:block max-lg:w-full w-auto inline-block py-2 px-4 text-white rounded bg-sky-600 border-2 border-sky-600 uppercase text-center">Cadastre-se e use grátis por 20 dias</a>
+            <a href="#features" onClick={(e) => handleScroll(e)} className="max-lg:block max-lg:w-full max-lg:ml-0 max-lg:mt-4 w-auto ml-4 inline-block py-2 px-4 text-sky-600 rounded bg-white border-2 border-sky-600 text-center uppercase">Conheça as funcionalidades</a>
           </div>
           <div className="max-lg:hidden w-1/5 relative"></div>
         </div>
@@ -170,7 +169,7 @@ export default function Home() {
       <div className="bg-white">
         <div className="container px-4 py-10 max-w-screen-xl mx-auto text-center">
           <h2 className="max-lg:w-full text-4xl font-bold w-3/4 text-text-color-ct mx-auto">Acompanhar a <span className="text-orange-ct">produtividade</span> e <span className="text-orange-ct">bem estar</span> dos seus colaboradores custa pouco.</h2>
-          <h2 className="max-lg:w-full text-3xl font-bold text-orange-ct mt-10 mb-10">Teste grátis por 20 dias.</h2>
+          <h2 className="max-lg:w-full text-3xl font-bold text-orange-ct mt-10 mb-10">Faça o seu cadastro e use grátis por 20 dias.</h2>
           <div className="max-lg:grid-cols-1 max-lg:px-10 grid grid-cols-4 gap-5">
             <Plans items={plans} />
           </div>
